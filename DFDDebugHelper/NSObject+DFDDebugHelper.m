@@ -13,12 +13,10 @@
 
 
 // 重写系统方法，打印模型的详细信息
--(NSString *)description
-{
+- (NSString *)description{
     NSArray *arrPropertys = [self filterPropertys];
     NSArray *arrValue = [self propertyValues:arrPropertys];
     NSMutableString *reuslt = [NSMutableString new];
-    //[reuslt appendString:[super description]];
     [reuslt appendString:@"\n"];
     for (int i = 0 ; i < arrPropertys.count; i++) {
         NSString *strProperty = arrPropertys[i];
@@ -29,13 +27,11 @@
 }
 
 // 获取所有属性名称
-- (NSArray *)filterPropertys
-{
+- (NSArray *)filterPropertys{
     NSMutableArray *props = [NSMutableArray array];
     unsigned int outCount, i;
     objc_property_t *properties = class_copyPropertyList([self class], &outCount);
-    for (i = 0; i<outCount; i++)
-    {
+    for (i = 0; i < outCount; i++){
         const char* char_f =property_getName(properties[i]);
         NSString *propertyName = [NSString stringWithUTF8String:char_f];
         [props addObject:propertyName];
